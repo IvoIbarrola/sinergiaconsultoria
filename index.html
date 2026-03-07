@@ -10,7 +10,13 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -30,73 +36,83 @@ margin:auto;
 text-align:center;
 }
 
+/* HEADER */
+
 header{
 background:white;
 box-shadow:0 2px 10px rgba(0,0,0,0.05);
-padding:15px 20px;
+padding:15px 30px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 .logo{
-font-weight:600;
+font-weight:700;
 color:#2F76A5;
 font-size:20px;
 }
 
 nav a{
-margin-left:20px;
+margin-left:25px;
 text-decoration:none;
 color:#333;
 font-weight:500;
 }
 
+/* HERO */
+
 .hero{
 background:linear-gradient(135deg,#2F76A5,#6D9DBB);
 color:white;
-padding:120px 20px;
+padding:140px 20px;
 text-align:center;
 }
 
 .hero h1{
-font-size:40px;
+font-size:42px;
 margin-bottom:20px;
 }
 
 .hero p{
 max-width:700px;
 margin:auto;
-margin-bottom:30px;
+margin-bottom:35px;
 font-size:18px;
 }
 
+/* BOTONES */
+
 .btn{
-background:#2F76A5;
-color:white;
-padding:14px 28px;
+background:white;
+color:#2F76A5;
+padding:14px 30px;
 border-radius:8px;
 text-decoration:none;
-font-weight:500;
+font-weight:600;
 transition:0.3s;
 display:inline-block;
 }
 
 .btn:hover{
-background:#1e5d84;
-transform:translateY(-2px);
+transform:translateY(-3px);
 }
+
+/* SERVICES */
 
 .services-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
 margin-top:40px;
 }
 
 .service{
 background:white;
-padding:30px;
+padding:35px;
 border-radius:12px;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 transition:0.3s;
@@ -105,6 +121,14 @@ transition:0.3s;
 .service:hover{
 transform:translateY(-6px);
 }
+
+.service i{
+font-size:40px;
+color:#2F76A5;
+margin-bottom:15px;
+}
+
+/* BENEFICIOS */
 
 .benefits-grid{
 display:grid;
@@ -125,6 +149,14 @@ transition:0.3s;
 transform:translateY(-5px);
 }
 
+.benefit i{
+font-size:35px;
+color:#2F76A5;
+margin-bottom:10px;
+}
+
+/* PROCESO */
+
 .process{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -139,30 +171,53 @@ border-radius:10px;
 box-shadow:0 6px 15px rgba(0,0,0,0.08);
 }
 
+/* CTA */
+
 .cta{
 background:#D1DFE7;
 text-align:center;
-padding:80px 20px;
+padding:90px 20px;
 }
+
+/* FOOTER */
 
 .footer{
 background:#2F76A5;
 color:white;
 text-align:center;
-padding:30px;
+padding:40px;
 }
+
+/* WHATSAPP */
 
 .whatsapp{
 position:fixed;
-bottom:20px;
-right:20px;
+bottom:25px;
+right:25px;
 background:#25D366;
 color:white;
-padding:15px 18px;
-border-radius:50px;
+font-size:22px;
+width:55px;
+height:55px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
 text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+box-shadow:0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* ANIMACION */
+
+.reveal{
+opacity:0;
+transform:translateY(30px);
+transition:0.6s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
 }
 
 </style>
@@ -174,17 +229,16 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 <header>
 
 <div class="logo">
-Sinergia Consultora
+Consultora de Siniestros
 </div>
-<!--
-    <nav>
-        <a href="#servicios">Servicios</a>
-        <a href="#beneficios">Beneficios</a>
-        <a href="#proceso">Cómo trabajamos</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-    -->
-    
+
+<nav>
+<a href="#servicios">Servicios</a>
+<a href="#beneficios">Beneficios</a>
+<a href="#proceso">Proceso</a>
+<a href="#contacto">Contacto</a>
+</nav>
+
 </header>
 
 <section class="hero">
@@ -192,7 +246,7 @@ Sinergia Consultora
 <h1>Gestión Profesional de Siniestros Automotores</h1>
 
 <p>
-Brindamos soluciones integrales para brokers y productores asesores de seguros,
+Brindamos soluciones especializadas para brokers y productores asesores de seguros,
 optimizando la gestión de reclamos y mejorando la experiencia del asegurado.
 </p>
 
@@ -200,30 +254,33 @@ optimizando la gestión de reclamos y mejorando la experiencia del asegurado.
 
 </section>
 
-<section class="section" id="servicios">
+<section class="section reveal" id="servicios">
 
 <h2>Servicios</h2>
 
 <div class="services-grid">
 
 <div class="service">
+<i class="fa-solid fa-file-contract"></i>
 <h3>Gestión de Siniestros</h3>
 <p>
-Administración integral de reclamos automotores ante compañías aseguradoras.
+Administración integral de reclamos automotores.
 </p>
 </div>
 
 <div class="service">
+<i class="fa-solid fa-magnifying-glass-chart"></i>
 <h3>Seguimiento de Expedientes</h3>
 <p>
-Control y monitoreo permanente del estado de cada siniestro.
+Control permanente del estado de cada caso.
 </p>
 </div>
 
 <div class="service">
-<h3>Asistencia a Brokers y PAS</h3>
+<i class="fa-solid fa-handshake"></i>
+<h3>Soporte a Brokers</h3>
 <p>
-Soporte especializado para optimizar la gestión administrativa de productores.
+Asistencia especializada para productores asesores.
 </p>
 </div>
 
@@ -231,51 +288,53 @@ Soporte especializado para optimizar la gestión administrativa de productores.
 
 </section>
 
-<section class="section">
+<section class="section reveal">
 
 <h2>Nuestro Servicio</h2>
 
 <p>
-Ofrecemos un servicio especializado orientado a productores asesores de seguros
-y brokers que buscan optimizar la gestión de siniestros automotores.
-Nuestro objetivo es acompañar cada proceso desde la recepción del caso hasta su
-resolución final, brindando seguimiento constante, asesoramiento profesional y
-una comunicación clara con las compañías aseguradoras.
+Ofrecemos un servicio especializado orientado a productores asesores de seguros y brokers
+que buscan optimizar la gestión de siniestros automotores. Nuestro objetivo es acompañar
+cada proceso desde la recepción del caso hasta su resolución final.
 </p>
 
 </section>
 
-<section class="section" id="beneficios">
+<section class="section reveal" id="beneficios">
 
 <h2>Beneficios para Brokers y PAS</h2>
 
 <div class="benefits-grid">
 
 <div class="benefit">
-<h3>Optimización de tiempos</h3>
+<i class="fa-solid fa-clock"></i>
+<h3>Ahorro de tiempo</h3>
 <p>
-Procesos organizados que permiten reducir los tiempos de gestión de siniestros.
+Procesos organizados que reducen los tiempos de gestión.
 </p>
 </div>
 
 <div class="benefit">
-<h3>Soporte especializado</h3>
+<i class="fa-solid fa-user-tie"></i>
+<h3>Soporte profesional</h3>
 <p>
-Acompañamiento profesional en cada etapa del proceso de reclamo.
+Acompañamiento experto en cada etapa del reclamo.
 </p>
 </div>
 
 <div class="benefit">
-<h3>Mejor experiencia del cliente</h3>
+<i class="fa-solid fa-star"></i>
+<h3>Mejor experiencia</h3>
 <p>
-Una gestión eficiente mejora la satisfacción del asegurado.
+Mayor satisfacción del asegurado.
 </p>
 </div>
 
 <div class="benefit">
+<i class="fa-solid fa-chart-line"></i>
 <h3>Seguimiento constante</h3>
 <p>
-Control permanente del estado de cada expediente.
+Control permanente de cada expediente.
 </p>
 </div>
 
@@ -283,45 +342,37 @@ Control permanente del estado de cada expediente.
 
 </section>
 
-<section class="section" id="proceso">
+<section class="section reveal" id="proceso">
 
 <h2>Cómo trabajamos</h2>
 
 <div class="process">
 
 <div>
-<h3>Recepción del caso</h3>
-<p>
-Recibimos la información inicial del siniestro.
-</p>
+<h3>Recepción</h3>
+<p>Recibimos la información inicial del siniestro.</p>
 </div>
 
 <div>
 <h3>Análisis</h3>
-<p>
-Evaluamos la documentación y definimos la estrategia.
-</p>
+<p>Evaluación técnica del expediente.</p>
 </div>
 
 <div>
 <h3>Gestión</h3>
-<p>
-Realizamos el seguimiento del reclamo con la aseguradora.
-</p>
+<p>Seguimiento del reclamo con la aseguradora.</p>
 </div>
 
 <div>
 <h3>Resolución</h3>
-<p>
-Acompañamos el proceso hasta su resolución final.
-</p>
+<p>Acompañamos el proceso hasta su finalización.</p>
 </div>
 
 </div>
 
 </section>
 
-<section class="cta" id="contacto">
+<section class="cta reveal" id="contacto">
 
 <h2>¿Sos Broker o Productor Asesor de Seguros?</h2>
 
@@ -344,8 +395,34 @@ Podemos ayudarte a optimizar la gestión de siniestros automotores.
 </footer>
 
 <a class="whatsapp" href="https://wa.me/5490000000000">
-WhatsApp
+<i class="fa-brands fa-whatsapp"></i>
 </a>
+
+<script>
+
+function reveal(){
+
+var reveals = document.querySelectorAll(".reveal");
+
+for(var i=0;i<reveals.length;i++){
+
+var windowHeight = window.innerHeight;
+var elementTop = reveals[i].getBoundingClientRect().top;
+var elementVisible = 100;
+
+if(elementTop < windowHeight - elementVisible){
+
+reveals[i].classList.add("active");
+
+}
+
+}
+
+}
+
+window.addEventListener("scroll", reveal);
+
+</script>
 
 </body>
 
