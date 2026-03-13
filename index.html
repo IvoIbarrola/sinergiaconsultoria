@@ -1,708 +1,716 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sinergia Consultoría | Gestión de Siniestros</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:'Inter',sans-serif;
-background:#FCFAFD;
-color:#333;
-}
-
-h1,h2,h3{
-font-family:'Poppins',sans-serif;
-}
-
-.section{
-padding:80px 20px;
-max-width:1100px;
-margin:auto;
-text-align:center;
-}
-
-/* HEADER */
-
-header{
-background:transparent;
-padding:20px 40px;
-display:flex;
-justify-content:center;
-align-items:center;
-position:absolute;
-top:0;
-width:100%;
-z-index:1000;
-}
-
-nav a{
-margin-left:25px;
-text-decoration:none;
-color:white;
-font-weight:500;
-}
-
-.logo{
-    justify-content:center;
-    align-items:center;
-}
-
-.logo img{
-    height: 150px;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-}
-
-
-.hero{
-    position:relative;
-    height:85vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-}
-
-.hero::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-
-    background-image:url("imagen-header.jpg");
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-
-    filter: brightness(50%) saturate(60%);
-}
-
-.hero::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.35);
-}
-
-.hero-overlay{
-    position:relative;
-    padding:80px 20px;
-    text-align:center;
-    color:white;
-    width:100%;
-    z-index:2;
-}
-
-@media (max-width:768px){
-
-.hero-overlay{
-padding:110px 20px 60px 20px;
-}
-
-}
-
-.hero h1{
-    font-size:42px;
-    margin-bottom:20px;
-}
-
-.hero p{
-    max-width:700px;
-    margin:auto;
-    margin-bottom:20px;
-    font-size:18px;
-}
-
-@media (max-width:768px){
-
-.hero{
-background-image:url("hero-mobile.jpg");
-height:75vh;
-background-position:center;
-
-}
-
-.hero h1{
-font-size:30px;
-}
-
-.hero p{
-font-size:16px;
-}
-}
-
-/* BOTON */
-
-.btn{
-background:white;
-color:#2F76A5;
-padding:14px 30px;
-border-radius:8px;
-text-decoration:none;
-font-weight:600;
-display:inline-block;
-margin-top:15px;
-}
-
-/* SERVICES */
-
-.services-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.service{
-background:white;
-padding:35px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.service i{
-font-size:40px;
-color:#2F76A5;
-margin-bottom:15px;
-}
-
-/* BENEFITS */
-
-.benefits-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.benefit{
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
-
-.benefit i{
-font-size:35px;
-color:#2F76A5;
-margin-bottom:10px;
-}
-
-/* PROCESO */
-
-.process{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.process div{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 6px 15px rgba(0,0,0,0.08);
-}
-
-/* FAQ */
-
-.faq{
-margin-top:40px;
-text-align:left;
-max-width:800px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.faq-item{
-background:white;
-padding:25px;
-margin-bottom:15px;
-border-radius:8px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-}
-
-.faq-item h3{
-color:#2F76A5;
-}
-
-/* LOGOS ASEGURADORAS */
-
-.logos{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-margin-top:40px;
-}
-
-.logos img{
-height:40px;
-opacity:0.7;
-}
-
-/* REDES */
-
-.social{
-display:flex;
-justify-content:center;
-gap:30px;
-margin-top:30px;
-}
-
-.social a{
-text-decoration:none;
-font-weight:600;
-color:#2F76A5;
-display:flex;
-align-items:center;
-gap:10px;
-font-size:18px;
-}
-
-/* CONTACTO */
-
-.cta{
-background:#D1DFE7;
-padding:90px 20px;
-text-align: center;
-}
-
-.contact-container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-margin-top:40px;
-align-items:center;
-max-width:900px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.contact-info{
-text-align:left;
-}
-
-.contact-info p{
-margin-bottom:12px;
-}
-
-.contact-info i{
-color:#2F76A5;
-margin-right:10px;
-}
-
-.map{
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,0.15);
-}
-
-.whatsapp-btn{
-display:inline-block;
-margin-top:20px;
-background:#25D366;
-color:white;
-padding:12px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:600;
-}
-
-@media (max-width:768px){
-
-.contact-container{
-grid-template-columns:1fr;
-}
-
-.contact-info{
-text-align:center;
-}
-
-}
-
-/* FOOTER */
-
-.footer{
-background:#2F76A5;
-color:white;
-text-align:center;
-padding:40px;
-}
-
-/* WHATSAPP */
-
-.whatsapp{
-position:fixed;
-bottom:25px;
-right:25px;
-background:#25D366;
-color:white;
-font-size:26px;
-width:60px;
-height:60px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-text-decoration:none;
-box-shadow:0 10px 25px rgba(0,0,0,0.35);
-transition:transform .3s;
-z-index:1000;
-}
-
-.whatsapp:hover{
-transform:scale(1.1);
-}
-/* ANIMACIONES SCROLL */
-
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:all 0.9s ease;
-}
-
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
-</style>
-
-<link rel="icon" type="image/png" href="favicon.ico">
-
-</head>
-
-<body>
-
-<header>
-
-    <div class="logo">
-        <img src="logo.png" alt="Sinergia Consultoría">
-    </div>
-    
-</header>
-
-<section class="hero">
-
-<div class="hero-overlay">
-
-<h1>Gestión Profesional de Siniestros para Brokers y PAS</h1>
-
-<p>
-Sinergia Consultoría es una firma especializada en la administración
-y gestión de siniestros dentro del mercado asegurador.
-</p>
-
-<p>
-Trabajamos junto a brokers y productores asesores optimizando la
-gestión administrativa de reclamos y mejorando la eficiencia
-operativa de sus carteras.
-</p>
-
-<a class="btn"
-href="https://wa.me/5491136052538?text=Hola,%20quisiera%20recibir%20información%20sobre%20los%20servicios%20de%20gestión%20de%20siniestros%20de%20Sinergia%20Consultoría."
-target="_blank">
-
-Contactar ahora
-
-</a>
-
-</div>
-
-</section>
-
-<section class="section reveal" id="servicios">
-
-<h2>Servicios</h2>
-
-<div class="services-grid">
-
-<div class="service">
-<i class="fa-solid fa-file-contract"></i>
-<h3>Administración de Siniestros</h3>
-<p>Gestión integral o parcial de siniestros.</p>
-</div>
-
-<div class="service">
-<i class="fa-solid fa-chart-line"></i>
-<h3>Seguimiento de Expedientes</h3>
-<p>Control permanente del estado de cada caso.</p>
-</div>
-
-<div class="service">
-<i class="fa-solid fa-handshake"></i>
-<h3>Soporte a Brokers y PAS</h3>
-<p>Optimización administrativa de carteras de siniestros.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2>Nuestro Servicio</h2>
-
-<p>
-Sinergia Consultoría actúa como socio estratégico para brokers
-y productores asesores que buscan optimizar la administración
-de sus carteras de siniestros.
-</p>
-
-<p>
-Nuestro equipo trabaja integrándose a los sistemas del cliente
-y siguiendo sus procesos internos, garantizando eficiencia,
-control y seguimiento permanente de cada expediente.
-</p>
-
-</section>
-
-<section class="section reveal" id="beneficios">
-
-<h2>Beneficios para Brokers y PAS</h2>
-
-<div class="benefits-grid">
-
-<div class="benefit">
-<i class="fa-solid fa-clock"></i>
-<h3>Ahorro de tiempo</h3>
-<p>Reducción de la carga administrativa.</p>
-</div>
-
-<div class="benefit">
-<i class="fa-solid fa-user-tie"></i>
-<h3>Gestión especializada</h3>
-<p>Profesionales con experiencia en seguros.</p>
-</div>
-
-<div class="benefit">
-<i class="fa-solid fa-chart-line"></i>
-<h3>Optimización de procesos</h3>
-<p>Mayor eficiencia operativa.</p>
-</div>
-
-<div class="benefit">
-<i class="fa-solid fa-lock"></i>
-<h3>Confidencialidad</h3>
-<p>Altos estándares de seguridad.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2>Equipo interdisciplinario</h2>
-
-<p>
-Nuestro equipo está conformado por abogados,
-técnicos en seguros y profesionales especializados
-en la gestión de siniestros.
-</p>
-
-</section>
-
-<section class="section">
-
-<h2>Soluciones para el mercado asegurador</h2>
-
-<p>
-La tercerización de procesos administrativos se
-convirtió en una práctica cada vez más común dentro
-del mercado asegurador internacional.
-</p>
-
-<p>
-Sinergia Consultoría acompaña esta evolución
-brindando soluciones que permiten a brokers
-y organizaciones optimizar sus recursos y
-mejorar sus procesos internos.
-</p>
-
-</section>
-
-<section class="section reveal">
-
-<h2>Trabajamos con</h2>
-
-<p>
-Nuestro servicio está orientado a profesionales
-y organizaciones del mercado asegurador.
-</p>
-
-<div class="logos">
-
-<img src="logo.png">
-<img src="logo.png">
-<img src="logo.png">
-<img src="logo.png">
-
-</div>
-
-<p>
-    Invitamos al mercado asegurador a contactarnos para desarrollar en conjunto la solución a su medida en la gestión de siniestro
-</p>
-
-</section>
-
-<section class="section reveal" id="proceso">
-
-<h2>Cómo trabajamos</h2>
-
-<div class="process">
-
-<div>
-<h3>Recepción</h3>
-<p>Recepción del caso y documentación.</p>
-</div>
-
-<div>
-<h3>Análisis</h3>
-<p>Evaluación técnica del expediente.</p>
-</div>
-
-<div>
-<h3>Gestión</h3>
-<p>Seguimiento administrativo del reclamo.</p>
-</div>
-
-<div>
-<h3>Resolución</h3>
-<p>Cierre del expediente.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2>Seguinos en redes</h2>
-
-<div class="social">
-
-<a href="https://www.instagram.com/sinergiasiniestros/" target="_blank">
-<i class="fa-brands fa-instagram"></i> Instagram
-</a>
-
-<a href="https://linkedin.com" target="_blank">
-<i class="fa-brands fa-linkedin"></i> LinkedIn
-</a>
-
-</div>
-
-</section>
-
-<section class="cta reveal" id="contacto">
-
-<h2>Contacto</h2>
-
-<div class="contact-container">
-
-<div class="map">
-
-<iframe
-src="https://www.google.com/maps?q=Las%20Heras%20350%20Argentina&output=embed"
-width="100%"
-height="350"
-style="border:0;"
-allowfullscreen=""
-loading="lazy">
-</iframe>
-
-</div>
-
-<div class="contact-info">
-
-<p>
-<i class="fa-solid fa-location-dot"></i>
-Las Heras 350 – Departamento 305<br>
-CP 1714
-</p>
-
-<p>
-<i class="fa-solid fa-phone"></i>
-+54 11 3605 2538
-</p>
-
-<p>
-<i class="fa-solid fa-envelope"></i>
-npatella@sinergiaconsultora.com
-</p>
-
-<a class="whatsapp-btn"
-href="https://wa.me/5491136052538?text=Hola,%20quisiera%20recibir%20información%20sobre%20los%20servicios%20de%20gestión%20de%20siniestros%20de%20Sinergia%20Consultoría."
-target="_blank">
-
-<i class="fa-brands fa-whatsapp"></i>
-Escribir por WhatsApp
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<footer class="footer">
-
-<p>© 2026 Sinergia Consultoría</p>
-
-<p>Gestión profesional de siniestros</p>
-
-</footer>
-
-<a class="whatsapp"
-href="https://wa.me/5491136052538?text=Hola,%20quisiera%20recibir%20información%20sobre%20los%20servicios%20de%20gestión%20de%20siniestros%20de%20Sinergia%20Consultoría."
-target="_blank">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-</a>
-
-<script>
-
-function reveal(){
-
-var reveals = document.querySelectorAll(".reveal");
-
-for(var i = 0; i < reveals.length; i++){
-
-var windowHeight = window.innerHeight;
-var elementTop = reveals[i].getBoundingClientRect().top;
-var elementVisible = 120;
-
-if(elementTop < windowHeight - elementVisible){
-reveals[i].classList.add("active");
-}
-
-}
-
-}
-
-window.addEventListener("scroll", reveal);
-
-</script>
-
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sinergia Consultoría | Gestión de Siniestros</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: #fcfafd;
+        color: #333;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .section {
+        padding: 80px 20px;
+        max-width: 1100px;
+        margin: auto;
+        text-align: center;
+      }
+
+      /* HEADER */
+
+      header {
+        background: transparent;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      nav a {
+        margin-left: 25px;
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+      }
+
+      .logo {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 150px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+      }
+
+      .hero {
+        position: relative;
+        height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        background-image: url("imagen-header.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+
+        filter: brightness(50%) saturate(60%);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.35);
+      }
+
+      .hero-overlay {
+        position: relative;
+        padding: 80px 20px;
+        text-align: center;
+        color: white;
+        width: 100%;
+        z-index: 2;
+      }
+
+      @media (max-width: 768px) {
+        .hero-overlay {
+          padding: 110px 20px 60px 20px;
+        }
+      }
+
+      .hero h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        max-width: 700px;
+        margin: auto;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          background-image: url("hero-mobile.jpg");
+          height: 75vh;
+          background-position: center;
+        }
+
+        .hero h1 {
+          font-size: 30px;
+        }
+
+        .hero p {
+          font-size: 16px;
+        }
+      }
+
+      /* BOTON */
+
+      .btn {
+        background: white;
+        color: #2f76a5;
+        padding: 14px 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      /* SERVICES */
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .service {
+        background: white;
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .service i {
+        font-size: 40px;
+        color: #2f76a5;
+        margin-bottom: 15px;
+      }
+
+      /* BENEFITS */
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .benefit {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .benefit i {
+        font-size: 35px;
+        color: #2f76a5;
+        margin-bottom: 10px;
+      }
+
+      /* PROCESO */
+
+      .process {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .process div {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      /* FAQ */
+
+      .faq {
+        margin-top: 40px;
+        text-align: left;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .faq-item {
+        background: white;
+        padding: 25px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .faq-item h3 {
+        color: #2f76a5;
+      }
+
+      /* LOGOS ASEGURADORAS */
+
+      .logos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 40px;
+      }
+
+      .logos img {
+        height: 40px;
+        opacity: 0.7;
+      }
+
+      /* REDES */
+
+      .social {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .social a {
+        text-decoration: none;
+        font-weight: 600;
+        color: #2f76a5;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+      }
+
+      /* CONTACTO */
+
+      .cta {
+        background: #d1dfe7;
+        padding: 90px 20px;
+        text-align: center;
+      }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 40px;
+        align-items: center;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact-info {
+        text-align: left;
+      }
+
+      .contact-info p {
+        margin-bottom: 12px;
+      }
+
+      .contact-info i {
+        color: #2f76a5;
+        margin-right: 10px;
+      }
+
+      .map {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .whatsapp-btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #25d366;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+          text-align: center;
+        }
+      }
+
+      /* FOOTER */
+
+      .footer {
+        background: #2f76a5;
+        color: white;
+        text-align: center;
+        padding: 40px;
+      }
+
+      /* WHATSAPP */
+
+      .whatsapp {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: #25d366;
+        color: white;
+        font-size: 26px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        transition: transform 0.3s;
+        z-index: 1000;
+      }
+
+      .whatsapp:hover {
+        transform: scale(1.1);
+      }
+      /* ANIMACIONES SCROLL */
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.9s ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+
+    <link rel="icon" type="image/png" href="favicon.ico" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="Sinergia Consultoría" />
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-overlay">
+        <h1>Gestión de Siniestros para Brokers y PAS</h1>
+
+        <p>
+          Sinergia Consultoría es una firma especializada en la administración y
+          gestión de siniestros dentro del mercado asegurador.
+        </p>
+
+        <p>
+          Trabajamos junto a brokers y productores asesores optimizando la
+          gestión administrativa y garantizando una mejor experiencia para el
+          cliente
+        </p>
+
+        <a
+          class="btn"
+          href="https://wa.me/5491136052538?text=Hola,%20quisiera%20recibir%20información%20sobre%20los%20servicios%20de%20gestión%20de%20siniestros%20de%20Sinergia%20Consultoría."
+          target="_blank"
+        >
+          Contactar ahora
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal" id="servicios">
+      <h2>Servicios</h2>
+
+      <div class="services-grid">
+        <div class="service">
+          <i class="fa-solid fa-file-contract"></i>
+          <h3>Administración de Siniestros</h3>
+          <p>Gestión integral o parcial de siniestros.</p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Seguimiento de Expedientes</h3>
+          <p>Control permanente del estado de cada caso.</p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-handshake"></i>
+          <h3>Soporte a Brokers y PAS</h3>
+          <p>Optimización administrativa de carteras de siniestros.</p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-briefcase"></i>
+          <h3>Gestión Integral de Siniestros</h3>
+          <p>Atención de siniestros en cartera de clientes y PAS asociados.</p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-user-gear"></i>
+          <h3>Consultoría Personalizada</h3>
+          <p>Asesoramiento especializado adaptado a cada organización.</p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-users"></i>
+          <h3>Equipo Multidisciplinario</h3>
+          <p>
+            Profesionales con experiencia comprobable en el mercado asegurador.
+          </p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-gears"></i>
+          <h3>Optimización de Procesos</h3>
+          <p>Mejora continua en la gestión administrativa de siniestros.</p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-layer-group"></i>
+          <h3>Enfoque Integral</h3>
+          <p>
+            Servicios adaptados a las necesidades específicas de cada cliente.
+          </p>
+        </div>
+
+        <div class="service">
+          <i class="fa-solid fa-scale-balanced"></i>
+          <h3>Reclamos de Terceros</h3>
+          <p>Gestión y seguimiento de reclamos de terceros.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Nuestro Servicio</h2>
+
+      <p>
+        Sinergia Consultoría actúa como socio estratégico para brokers y
+        productores asesores que buscan optimizar la administración de sus
+        carteras de siniestros.
+      </p>
+
+      <p>
+        Nuestro equipo trabaja integrándose a los sistemas del cliente y
+        siguiendo sus procesos internos, garantizando eficiencia, control y
+        seguimiento permanente de cada expediente.
+      </p>
+    </section>
+
+    <section class="section reveal" id="beneficios">
+      <h2>Beneficios para Brokers y PAS</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit">
+          <i class="fa-solid fa-clock"></i>
+          <h3>Ahorro de tiempo</h3>
+          <p>Reducción de la carga administrativa.</p>
+        </div>
+
+        <div class="benefit">
+          <i class="fa-solid fa-user-tie"></i>
+          <h3>Gestión especializada</h3>
+          <p>Profesionales con experiencia en seguros.</p>
+        </div>
+
+        <div class="benefit">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Optimización de procesos</h3>
+          <p>Mayor eficiencia operativa.</p>
+        </div>
+
+        <div class="benefit">
+          <i class="fa-solid fa-lock"></i>
+          <h3>Confidencialidad</h3>
+          <p>Altos estándares de seguridad.</p>
+        </div>
+
+        <div class="benefit">
+          <i class="fa-solid fa-gavel"></i>
+          <h3>Asesoramiento Legal</h3>
+          <p>
+            Apoyo profesional en cuestiones legales vinculadas a siniestros.
+          </p>
+        </div>
+
+        <div class="benefit">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <h3>Asesoramiento Técnico</h3>
+          <p>
+            Soporte especializado para la correcta gestión técnica de los
+            reclamos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Equipo interdisciplinario</h2>
+
+      <p>
+        Nuestro equipo está conformado por abogados, técnicos en seguros y
+        profesionales especializados en la gestión de siniestros.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Soluciones para el mercado asegurador</h2>
+
+      <p>
+        La tercerización de procesos administrativos se convirtió en una
+        práctica cada vez más común dentro del mercado asegurador internacional.
+      </p>
+
+      <p>
+        Sinergia Consultoría acompaña esta evolución brindando soluciones que
+        permiten a brokers y organizaciones optimizar sus recursos y mejorar sus
+        procesos internos.
+      </p>
+    </section>
+
+    <section class="section reveal">
+      <h2>Trabajamos con</h2>
+
+      <p>
+        Nuestro servicio está orientado a profesionales y organizaciones del
+        mercado asegurador. Invitamos al mercado asegurador a contactarnos para
+        desarrollar en conjunto la solución a su medida en la gestión de
+        siniestro
+      </p>
+    </section>
+
+    <section class="section reveal" id="proceso">
+      <h2>Cómo trabajamos</h2>
+
+      <div class="process">
+        <div>
+          <h3>Recepción</h3>
+          <p>Recepción del caso y documentación.</p>
+        </div>
+
+        <div>
+          <h3>Análisis</h3>
+          <p>Evaluación técnica del expediente.</p>
+        </div>
+
+        <div>
+          <h3>Gestión</h3>
+          <p>Seguimiento administrativo del reclamo.</p>
+        </div>
+
+        <div>
+          <h3>Resolución</h3>
+          <p>Cierre del expediente.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Seguinos en redes</h2>
+
+      <div class="social">
+        <a href="https://www.instagram.com/sinergiasiniestros/" target="_blank">
+          <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/nicolas-alejandro-patella-97b535156/"
+          target="_blank"
+        >
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <section class="cta reveal" id="contacto">
+      <h2>Contacto</h2>
+
+      <div class="contact-container">
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps?q=Gral.%20Las%20Heras%20350%20dpto%20305%20Ituzaing%C3%B3%20Buenos%20Aires&output=embed"
+            width="100%"
+            height="350"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+
+          <div style="text-align: center; margin-top: 15px">
+            <a
+              href="https://www.google.com/maps/place/Gral.+las+Heras+350+dpto+305,+B1714+Ituzaing%C3%B3,+Provincia+de+Buenos+Aires/"
+              target="_blank"
+              class="btn"
+            >
+              Ver ubicación en Google Maps
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-info">
+          <p>
+            <i class="fa-solid fa-location-dot"></i>
+            Las Heras 350 – Departamento 305<br />
+            CP 1714
+          </p>
+
+          <p>
+            <i class="fa-solid fa-phone"></i>
+            +54 11 3605 2538
+          </p>
+
+          <p>
+            <i class="fa-solid fa-envelope"></i>
+            npatella@sinergiaconsultora.com
+          </p>
+
+          <a
+            class="whatsapp-btn"
+            href="https://wa.me/5491136052538?text=Hola,%20quisiera%20recibir%20información%20sobre%20los%20servicios%20de%20gestión%20de%20siniestros%20de%20Sinergia%20Consultoría."
+            target="_blank"
+          >
+            <i class="fa-brands fa-whatsapp"></i>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Sinergia Consultoría</p>
+
+      <p>Gestión profesional de siniestros</p>
+    </footer>
+
+    <a
+      class="whatsapp"
+      href="https://wa.me/5491136052538?text=Hola,%20quisiera%20recibir%20información%20sobre%20los%20servicios%20de%20gestión%20de%20siniestros%20de%20Sinergia%20Consultoría."
+      target="_blank"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 120;
+
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          }
+        }
+      }
+
+      window.addEventListener("scroll", reveal);
+    </script>
+  </body>
 </html>
