@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const TaskyApp());
@@ -31,6 +34,20 @@ class Task {
     required this.title,
     this.completed = false,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'completed': completed,
+    };
+  }
+
+  factory Task.fromMap(Map<String, dynamic> map) {
+    return Task(
+      title: map['title'],
+      completed: map['completed'] ?? false,
+    );
+  }
 }
 
 class TaskListPage extends StatefulWidget {
@@ -41,11 +58,46 @@ class TaskListPage extends StatefulWidget {
 }
 
 class _TaskListPageState extends State<TaskListPage> {
-  final List<Task> tasks = [
-    Task(title: 'Aprender Flutter'),
-    Task(title: 'Crear mi primera aplicación'),
-    Task(title: 'Probar Tasky en el celular'),
-  ];
+  List<Task> tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTasks();
+  }
+
+  Future<void> _loadTasks() async {
+    final preferences = await SharedPreferences.getInstance();
+
+    final savedTasks = preferences.getString('tasks');
+
+    if (savedTasks == null) {
+      return;
+    }
+
+    final List<dynamic> decodedTasks = jsonDecode(savedTasks);
+
+    setState(() {
+      tasks = decodedTasks
+          .map(
+            (task) => Task.fromMap(task),
+          )
+          .toList();
+    });
+  }
+
+  Future<void> _saveTasks() async {
+    final preferences = await SharedPreferences.getInstance();
+
+    final encodedTasks = jsonEncode(
+      tasks.map((task) => task.toMap()).toList(),
+    );
+
+    await preferences.setString(
+      'tasks',
+      encodedTasks,
+    );
+  }
 
   void _addTask() {
     final controller = TextEditingController();
@@ -83,6 +135,8 @@ class _TaskListPageState extends State<TaskListPage> {
                   );
                 });
 
+                _saveTasks();
+
                 Navigator.pop(context);
               },
               child: const Text('Agregar'),
@@ -91,6 +145,22 @@ class _TaskListPageState extends State<TaskListPage> {
         );
       },
     );
+  }
+
+  void _toggleTask(Task task, bool? value) {
+    setState(() {
+      task.completed = value ?? false;
+    });
+
+    _saveTasks();
+  }
+
+  void _deleteTask(int index) {
+    setState(() {
+      tasks.removeAt(index);
+    });
+
+    _saveTasks();
   }
 
   @override
@@ -115,9 +185,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   leading: Checkbox(
                     value: task.completed,
                     onChanged: (value) {
-                      setState(() {
-                        task.completed = value ?? false;
-                      });
+                      _toggleTask(task, value);
                     },
                   ),
                   title: Text(
@@ -127,6 +195,12 @@ class _TaskListPageState extends State<TaskListPage> {
                           ? TextDecoration.lineThrough
                           : TextDecoration.none,
                     ),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      _deleteTask(index);
+                    },
                   ),
                 );
               },
