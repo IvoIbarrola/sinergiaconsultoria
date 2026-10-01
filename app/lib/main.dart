@@ -1,120 +1,395 @@
 import 'package:flutter/material.dart';
 
+
+// ============================================================
+// PUNTO DE ENTRADA DE LA APLICACIÓN
+// ============================================================
+
+// main() es la función que se ejecuta primero.
+// En Dart, toda aplicación comienza desde esta función.
 void main() {
-  runApp(const MyApp());
+  // runApp() recibe el Widget principal de nuestra aplicación
+  // y se encarga de mostrarlo en pantalla.
+  runApp(const TaskyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  // This widget is the root of your application.
+// ============================================================
+// APLICACIÓN PRINCIPAL
+// ============================================================
+
+// Una "class" define un objeto.
+// En Flutter, prácticamente toda la interfaz está construida
+// utilizando clases llamadas Widgets.
+//
+// StatelessWidget significa que este Widget NO tiene un estado
+// interno que vaya a cambiar durante su funcionamiento.
+//
+// En este caso, TaskyApp se encarga principalmente de configurar
+// la aplicación.
+class TaskyApp extends StatelessWidget {
+
+  // Constructor de la clase.
+  //
+  // "const" permite crear este objeto como una constante cuando
+  // sus valores no necesitan cambiar.
+  //
+  // "super.key" pasa una key al Widget padre (StatelessWidget).
+  const TaskyApp({super.key});
+
+
+  // build() describe qué interfaz debe mostrar este Widget.
+  //
+  // Flutter llama a este método cuando necesita construir
+  // o reconstruir la interfaz.
   @override
   Widget build(BuildContext context) {
+
+    // MaterialApp es el Widget principal de una aplicación Flutter
+    // que utiliza Material Design.
     return MaterialApp(
-      title: 'Flutter Demo',
+
+      // Elimina la etiqueta "DEBUG" que Flutter muestra
+      // normalmente en la esquina superior derecha.
+      debugShowCheckedModeBanner: false,
+
+      // Nombre de nuestra aplicación.
+      title: 'Tasky',
+
+      // Configuración visual general de la aplicación.
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo,
+        ),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
+      // Pantalla que se mostrará al iniciar la aplicación.
+      home: const TaskListPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+// ============================================================
+// MODELO DE UNA TAREA
+// ============================================================
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+// Esta clase representa una TAREA.
+//
+// Acá aparece uno de los conceptos principales de POO:
+//
+// Una clase puede utilizarse como "molde" para crear objetos.
+//
+// Por ejemplo:
+//
+//   Task(title: 'Comprar leche')
+//
+// crea un objeto Task que representa una tarea concreta.
+class Task {
 
+  // "final" significa que el valor se establece una vez
+  // y después no puede cambiar.
+  //
+  // El título de una tarea no debería cambiar directamente
+  // en nuestra implementación actual.
   final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+
+  // A diferencia de title, completed NO es final.
+  //
+  // Esto significa que su valor puede cambiar.
+  //
+  // Ejemplo:
+  //
+  //   task.completed = true;
+  //
+  // Esto nos permite marcar una tarea como completada
+  // o volver a dejarla pendiente.
+  bool completed;
+
+
+  // Constructor de Task.
+  //
+  // "required" significa que debemos proporcionar un título
+  // cuando creemos una tarea.
+  //
+  // "completed = false" establece false como valor
+  // predeterminado si no indicamos otro.
+  Task({
+    required this.title,
+    this.completed = false,
+  });
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+// ============================================================
+// PANTALLA PRINCIPAL DE TAREAS
+// ============================================================
 
+// Esta clase representa nuestra pantalla principal.
+//
+// StatefulWidget significa que esta pantalla TIENE ESTADO.
+//
+// En nuestro caso, el estado son principalmente las tareas
+// y si están completadas o no.
+//
+// Esto es diferente a TaskyApp, que era StatelessWidget.
+class TaskListPage extends StatefulWidget {
+
+  const TaskListPage({super.key});
+
+
+  // Un StatefulWidget se divide en dos partes:
+//
+// 1. TaskListPage
+//    Representa el Widget.
+//
+// 2. _TaskListPageState
+//    Contiene los datos que pueden cambiar y la lógica
+//    necesaria para actualizar la pantalla.
+//
+// createState() conecta ambas partes.
+  @override
+  State<TaskListPage> createState() => _TaskListPageState();
+}
+
+
+// ============================================================
+// ESTADO DE LA PANTALLA
+// ============================================================
+
+// El "_" al principio del nombre significa que esta clase
+// es privada para este archivo.
+//
+// Acá guardamos los datos que pueden cambiar.
+//
+// Por ejemplo:
+// - lista de tareas
+// - tareas completadas
+//
+// Cuando estos datos cambien, podremos indicarle a Flutter
+// que vuelva a dibujar la interfaz.
+class _TaskListPageState extends State<TaskListPage> {
+
+
+  // Lista que contiene nuestras tareas.
+  //
+  // List<Task> significa:
+  //
+  // "Una lista cuyos elementos son objetos de tipo Task".
+  //
+  // Por ahora las tareas están escritas directamente en el código.
+  //
+  // Más adelante esta lista podría venir de:
+  // - almacenamiento local
+  // - una API
+  // - una base de datos
+  final List<Task> tasks = [
+
+    Task(
+      title: 'Aprender Flutter',
+    ),
+
+    Task(
+      title: 'Crear mi primera aplicación',
+    ),
+
+    Task(
+      title: 'Probar Tasky en el celular',
+    ),
+  ];
+
+
+  // ==========================================================
+  // CONSTRUCCIÓN DE LA INTERFAZ
+  // ==========================================================
+
+  // build() describe cómo debe verse esta pantalla.
+  //
+  // Cada vez que llamemos a setState(), Flutter volverá a
+  // ejecutar este método para actualizar la interfaz.
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
+
+    // Scaffold proporciona una estructura básica de pantalla.
     //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    // Por ejemplo:
+    // - AppBar
+    // - contenido principal
+    // - botón flotante
     return Scaffold(
+
+
+      // ========================================================
+      // BARRA SUPERIOR
+      // ========================================================
+
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+
+        // Texto que aparece en la barra superior.
+        title: const Text('Tasky'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+
+
+      // ========================================================
+      // CONTENIDO PRINCIPAL
+      // ========================================================
+
+      // Acá utilizamos un operador ternario.
+      //
+      // Es una forma corta de escribir un if/else.
+      //
+      // La estructura es:
+      //
+      // condición ? resultado_si_true : resultado_si_false
+      //
+      // En nuestro caso:
+      //
+      // Si no hay tareas -> mostrar "No hay tareas"
+      //
+      // Si hay tareas -> mostrar la lista.
+      body: tasks.isEmpty
+
+          ? const Center(
+              child: Text(
+                'No hay tareas',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            )
+
+          : ListView.builder(
+
+              // Cantidad de elementos que tendrá la lista.
+              itemCount: tasks.length,
+
+
+              // itemBuilder se ejecuta para construir
+              // cada elemento de la lista.
+              //
+              // "index" indica la posición actual.
+              //
+              // Ejemplo:
+              //
+              // index = 0 -> primera tarea
+              // index = 1 -> segunda tarea
+              // index = 2 -> tercera tarea
+              itemBuilder: (context, index) {
+
+                // Obtenemos la tarea correspondiente
+                // a la posición actual.
+                final task = tasks[index];
+
+
+                // Cada tarea será representada mediante
+                // un ListTile.
+                return ListTile(
+
+
+                  // ==================================================
+                  // CHECKBOX
+                  // ==================================================
+
+                  // leading coloca un Widget al comienzo
+                  // del ListTile.
+                  leading: Checkbox(
+
+                    // value indica si el checkbox está marcado.
+                    //
+                    // Utilizamos el valor "completed" de nuestra tarea.
+                    value: task.completed,
+
+
+                    // onChanged se ejecuta cuando el usuario
+                    // toca el checkbox.
+                    //
+                    // "value" contiene el nuevo valor.
+                    onChanged: (value) {
+
+                      // =================================================
+                      // setState()
+                      // =================================================
+
+                      // setState() es MUY importante en Flutter.
+                      //
+                      // Le estamos diciendo a Flutter:
+                      //
+                      // "El estado de esta pantalla cambió.
+                      // Volvé a construir la interfaz."
+                      //
+                      // Si modificáramos task.completed sin utilizar
+                      // setState(), el valor podría cambiar internamente
+                      // pero Flutter no necesariamente actualizaría
+                      // la pantalla.
+                      setState(() {
+
+                        // Guardamos el nuevo valor del checkbox
+                        // dentro de nuestra tarea.
+                        //
+                        // "?? false" significa:
+                        //
+                        // Si value es null, utilizamos false.
+                        task.completed = value ?? false;
+                      });
+                    },
+                  ),
+
+
+                  // ==================================================
+                  // TÍTULO DE LA TAREA
+                  // ==================================================
+
+                  title: Text(
+
+                    // Mostramos el título de nuestra tarea.
+                    task.title,
+
+
+                    // Cambiamos el estilo dependiendo de si
+                    // la tarea está completada.
+                    style: TextStyle(
+
+                      // TextDecoration.lineThrough dibuja una línea
+                      // atravesando el texto.
+                      //
+                      // Si la tarea está completada:
+                      //
+                      //   Aprender Flutter
+                      //   ----------------
+                      //
+                      // Si no está completada:
+                      //
+                      //   Aprender Flutter
+                      decoration: task.completed
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                    ),
+                  ),
+                );
+              },
             ),
-          ],
-        ),
-      ),
+
+
+      // ========================================================
+      // BOTÓN FLOTANTE
+      // ========================================================
+
+      // FloatingActionButton normalmente se utiliza
+      // para una acción principal de la pantalla.
+      //
+      // En Tasky lo utilizaremos para agregar una nueva tarea.
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+
+        // onPressed se ejecuta cuando el usuario presiona
+        // el botón.
+        //
+        // Actualmente está vacío porque todavía no
+        // implementamos la creación de tareas.
+        onPressed: () {},
+
+        // Ícono "+".
         child: const Icon(Icons.add),
       ),
     );
